@@ -10,12 +10,12 @@ declare global {
 
 navigator.__defineGetter__("hardwareConcurrency", () => 1);
 
-import {
+const {
   BlobReader,
   BlobWriter,
   TextReader,
   ZipWriter,
-} from "https://deno.land/x/zipjs@v2.6.27/index.js";
+} = await import("https://deno.land/x/zipjs@v2.6.27/index.js");
 
 async function main(req: Request): Promise<Blob> {
   const url = new URL(req.url);
