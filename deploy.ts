@@ -2,10 +2,15 @@ import { serve } from "https://deno.land/std@0.156.0/http/server.ts";
 import {
   BlobReader,
   BlobWriter,
+  configure,
   TextReader,
   ZipWriter,
 } from "https://deno.land/x/zipjs@v2.6.27/index.js";
 import { fetchCss, FontFace } from "./common.ts";
+
+configure({
+  maxWorkers: 1,
+});
 
 async function main(req: Request): Promise<Blob> {
   const url = new URL(req.url);
