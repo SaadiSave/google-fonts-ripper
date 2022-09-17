@@ -13,7 +13,7 @@ The server will respond with a zip file containing the `woff2` files and a
 DO NOT USE THE SERVER IN PRODUCTION, AS IT IS SUJECT TO BREAKING CHANGES WITHOUT
 ANY WARNING WHATSOEVER. DOWNLOAD THE ZIP AND USE ITS CONTENTS IN PRODUCTION INSTEAD.
 
-## Example
+### Example
 
 ```sh
 curl "https://google-fonts-ripper/css2?family=JetBrains+Mono" --output fonts.zip
