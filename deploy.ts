@@ -1,21 +1,6 @@
 import { serve } from "https://deno.land/std@0.156.0/http/server.ts";
 import { fetchCss, FontFace } from "./common.ts";
-
-declare global {
-  interface Navigator {
-    // deno-lint-ignore no-explicit-any
-    __defineGetter__(name: string, fn: () => any): void;
-  }
-}
-
-navigator.__defineGetter__("hardwareConcurrency", () => 1);
-
-const {
-  BlobReader,
-  BlobWriter,
-  TextReader,
-  ZipWriter,
-} = await import("https://deno.land/x/zipjs@v2.6.27/index.js");
+import JSZip from "https://esm.sh/jszip@3.10.1";
 
 async function main(req: Request): Promise<Blob> {
   const url = new URL(req.url);
@@ -41,20 +26,18 @@ async function main(req: Request): Promise<Blob> {
     return { fileName: font.fileName, blob: font.fetchFont() };
   });
 
-  const zipFileWriter = new BlobWriter();
-  const zipWriter = new ZipWriter(zipFileWriter);
+  const zipFile = new JSZip();
+  const folder = zipFile.folder("fonts");
 
-  await zipWriter.add("fonts.css", new TextReader(outputCss));
+  folder?.file("fonts.css", outputCss);
 
   const promises = blobs.map(async ({ fileName, blob }) => {
-    await zipWriter.add(fileName, new BlobReader(await blob));
+    folder?.file(fileName, await blob);
   });
 
   await Promise.all(promises);
 
-  await zipWriter.close();
-
-  return await zipFileWriter.getData();
+  return zipFile.generateAsync({ type: "blob" });
 }
 
 serve(async (req) => {
