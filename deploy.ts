@@ -1,16 +1,21 @@
 import { serve } from "https://deno.land/std@0.156.0/http/server.ts";
+import { fetchCss, FontFace } from "./common.ts";
+
+declare global {
+  interface Navigator {
+    // deno-lint-ignore no-explicit-any
+    __defineGetter__(name: string, fn: () => any): void;
+  }
+}
+
+navigator.__defineGetter__("hardwareConcurrency", () => 1);
+
 import {
   BlobReader,
   BlobWriter,
-  configure,
   TextReader,
   ZipWriter,
 } from "https://deno.land/x/zipjs@v2.6.27/index.js";
-import { fetchCss, FontFace } from "./common.ts";
-
-configure({
-  maxWorkers: 1,
-});
 
 async function main(req: Request): Promise<Blob> {
   const url = new URL(req.url);
