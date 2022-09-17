@@ -10,7 +10,7 @@ Just take any google fonts request, e.g.
 The server will respond with a zip file containing the `woff2` files and a
 `fonts.css` file that you can import in css.
 
-DO NOT USE THE SERVER IN PRODUCTION, AS IT IS SUJECT TO BREAKING CHANGES WITHOUT
+DO NOT USE THE SERVER IN PRODUCTION, AS IT IS SUBJECT TO BREAKING CHANGES WITHOUT
 ANY WARNING WHATSOEVER. DOWNLOAD THE ZIP AND USE ITS CONTENTS IN PRODUCTION INSTEAD.
 
 ### Example
