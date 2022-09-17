@@ -27,12 +27,12 @@ async function main(req: Request): Promise<Blob> {
   });
 
   const zipFile = new JSZip();
-  const folder = zipFile.folder("fonts");
+  const dir = zipFile.folder("fonts");
 
-  folder?.file("fonts.css", outputCss);
+  dir?.file("fonts.css", outputCss);
 
   const promises = blobs.map(async ({ fileName, blob }) => {
-    folder?.file(fileName, await blob);
+    dir?.file(fileName, await blob);
   });
 
   await Promise.all(promises);
