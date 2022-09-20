@@ -61,7 +61,7 @@ export class FontFace {
   }
 
   get fileName(): string {
-    return `${this.family.replaceAll(" ", "")}${
+    return `${this.family.replace(/ /g, "")}${
       this.italic ? "Italic" : ""
     }${this.weight}${this.script}.woff2`;
   }

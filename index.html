@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Fonts Ripper</title>
+    <script type="module" src="index.js"></script>
+</head>
+<style>
+    body {
+        display: grid;
+        grid-template-rows: 35vh 7vh 13vh 10vh 35vh;
+        align-items: center;
+        justify-items: center;
+    }
+
+    label {
+        font-size: 5vh;
+    }
+
+    #req {
+        min-width: 40vw;
+        min-height: 3vh;
+        font-size: 2.5vh;
+    }
+
+    #download {
+        min-width: 10vw;
+        min-height: 10vh;
+        font-size: 3vh;
+    }
+</style>
+
+<body>
+    <span></span>
+    <label for="req">Enter the Google Fonts API request</label>
+    <input type="text" name="req" id="req">
+    <button id="download">Download</button>
+    <span></span>
+</body>
+
+</html>
