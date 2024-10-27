@@ -67,19 +67,17 @@ export class FontFace {
   }
 
   async fetchFont(): Promise<Blob> {
-    const req = new Request(this.url, {
-      method: 'GET',
-      headers: headers,
-      mode: "cors",
-    });
-
-    const response = await fetch(req);
+    const response = (typeof window !== "undefined")
+      ? await fetch(this.url)
+      : await fetch(this.url, { headers: headers });
 
     return response.blob();
   }
 }
 
 export async function fetchCss(url: string | URL | Request): Promise<string> {
-  const raw = await fetch(url, { headers: headers });
+  const raw = (typeof window !== "undefined")
+    ? await fetch(url)
+    : await fetch(url, { headers: headers });
   return await raw.text();
 }
